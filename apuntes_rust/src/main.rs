@@ -177,7 +177,7 @@ let y:i32 = 23; //tipado
 */ 
 
 // 4. FUNCIONES 
-
+/*
 fn main(){
  // Se suelen escribir en snake case  hola_mundo() 
 
@@ -223,6 +223,7 @@ Varias
 
 //6.BUCLES O CONTROL DE FLUJO 
 
+/*
 fn main(){
     //ejemolo
     fn main() {
@@ -331,4 +332,106 @@ fn main(){
 
 }
 }
+*/
+//7. PROPIEDAD 
+//Permite a Rust garantizar la seguridad de la memoria sin Necesito un basurero 
+/*
+Rust utiliza un tercer enfoque: 
+la memoria se gestiona a través 
+de un sistema de propiedad con un 
+conjunto de reglas que el compilador comprueba. 
+Si Si se incumple alguna norma, el programa no se compila. Ninguna de las características La propiedad 
+ralentizará tu programa mientras está en marcha. 
+
+    let mut s = String::from("hello");
+
+    s.push_str(", world!"); // push_str() appends a literal to a String
+
+    println!("{s}"); // this will print `hello, world!`
+
+*/ 
+
+*/
+//8. PROPIEDAD 
+// fn main(){
+//     //esto da error no se puede hacer para evitar la doble liberacion
+//      let s1 = String::from("hello");
+//     let s2 = s1;
+
+//     println!("{s1}, world!"); 
+  
+//     //Por medio de el metodo clone si podemos hacerlo hacemos una copia completa
+//  let s1 = String::from("hello");
+//     let s2 = s1.clone();
+
+//     println!("s1 = {s1}, s2 = {s2}");
+     
+
+//     //En este caso si podemos porque es asignado a la pila 
+//     // no hay que hacer copias profundas , tienen tamaño 
+//     //determinado 
+//     let x = 5;
+//     let y = x;
+
+//     println!("x = {x}, y = {y}");
+
+
+
+//9. ESTRUCTURAS . 
+
+//Declaración de una estructura 
+
+/*
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
 }
+ //si los valores van a ser mutables , la isntancia user 
+ //debe ser mutable , los valores independientemente 
+ //no se pueden hacer mutables. 
+
+    let mut user1 = User {
+        active: true,
+        username: String::from("someusername123"),
+        email: String::from("someone@example.com"),
+        sign_in_count: 1,
+    };
+
+     user1.email = String::from("anotheremail@example.com");
+}
+
+
+10. METODOS DE LOS STRUCTS 
+
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        rect1.area()
+    );
+}
+
+
+
+
+
+*/
+
