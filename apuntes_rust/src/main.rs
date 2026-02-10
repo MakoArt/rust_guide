@@ -375,6 +375,79 @@ ralentizará tu programa mientras está en marcha.
 
 //     println!("x = {x}, y = {y}");
 
+/* 
+
+
+
+/fn main(){ 
+    //dos maneras de declarar e inicializar un string 
+    // let s = String::from("hello");
+    // let s2:&str ="Hello"; 
+
+    // println!("{s},{s2}");
+
+    // //mutabilidad de los strings 
+
+    // let mut s = String::from("hello");
+
+    // s.push_str(", world!"); // push_str() appends a literal to a String
+
+    // println!("{s}"); // this will print `hello, world!`
+    
+    // //esto se puede hacer   
+    // //los datos primitivos simples puedo igualar una variable a otra 
+    // //de esta manera porque me crea una copia automaticamente
+    // let x = 5;
+    // let y = x;
+
+    // //Con un string la cosa cambia  esto daria un error por move :
+    // //el lenguage no copia un string y tendriamos un dangling pointer 
+    // //o puntero colgante 
+
+    // let s1 = String::from("hello");
+    // let s2 = s1;
+    
+    // //Con un string podemos clonar la variable 
+    // let s1 = String::from("hello");
+    // let s2 = s1.clone();
+
+    // println!("s1 = {s1}, s2 = {s2}");
+
+    // Funciones Ejemplo 1 
+    
+//     //paso parametros por referencia y me deja prestar a una funcion 
+//     //new_string sin perder la propiedad y es valido. 
+//     let new_string = String::from("Sambo");
+//     paso_parametros(&new_string); 
+//     println!("Me devuelve {}",new_string);
+   
+
+// }
+
+// fn paso_parametros(texto:&String){
+//     println!("{}",texto);
+//     //texto.clone()
+//     //texto
+// }
+
+//EJEMPLO 2 
+// tambien se puede hacer esto , la propiedad sigue siendo 
+// de new_string aunque hagamos devolucion y por referencia
+fn main(){
+     let new_string = String::from("Sambo");
+     let new_string2=paso_parametros(&new_string); 
+    println!("Me devuelve {}",new_string); 
+    println!("Me devuelve {}",new_string2);
+}
+
+
+fn paso_parametros(texto:&str)->&str{
+    println!("{}",texto);
+    texto
+   
+}
+
+
 
 
 //9. ESTRUCTURAS . 
@@ -428,9 +501,6 @@ fn main() {
         rect1.area()
     );
 }
-
-
-
 
 
 */
