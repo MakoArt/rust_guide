@@ -448,9 +448,82 @@ fn paso_parametros(texto:&str)->&str{
 }
 
 
+//9.CORTES O SLICES
+
+fn main(){
+
+    //1. una referencia a la parte continua de una colleccion , no es dueño de los datos solo apunta a referencia  
+
+    
+
+//     let mut s = String::from("hello world"); 
+//     let word = first_word(&s); 
+//     println!("{}",word);
+//     s.clear();
 
 
-//9. ESTRUCTURAS . 
+
+// }
+// // Problema que intenta resolver
+// // Imagina que quieres escribir una función que devuelva la primera palabra de un String.
+
+// //Sin slices, podrías devolver el índice donde termina la palabra: 
+
+// //nos referencia a todo 
+
+// fn first_word(s: &String) -> usize {
+//     let bytes = s.as_bytes();
+
+//     for (i, &item) in bytes.iter().enumerate() {
+//         if item == b' ' {
+//             return i;
+//         }
+//     }
+
+//     s.len()
+// }
+
+// //Cortes de cuerda  
+
+//     let s = String::from("hello world");
+
+//     let hello = &s[0..5];
+//     let world = &s[6..11];
+
+// //cartes de cuerda , 
+
+// let s = String::from("hello");
+
+// let len = s.len();
+
+// let slice = &s[3..len];
+// let slice = &s[3..];
+
+
+// //cortes con cuerdas  
+
+// fn first_word(s: &String) -> &str {
+//     let bytes = s.as_bytes();
+
+//     for (i, &item) in bytes.iter().enumerate() {
+//         if item == b' ' {
+//             return &s[0..i];
+//         }
+//     }
+
+//     &s[..]
+// }
+
+//Cortes en arrays   
+
+let a = [1, 2, 3, 4, 5];
+
+let slice = &a[1..3];
+
+assert_eq!(slice, &[2, 3]);
+
+
+//10. ESTRUCTURAS . 
 
 //Declaración de una estructura 
 
@@ -501,6 +574,61 @@ fn main() {
         rect1.area()
     );
 }
+
+//EJEMPLO CON ESTRUCTURA WARRIOR  
+
+
+struct Warrior {
+    name: String,
+    lives: u8,
+    strength: u8,
+}
+impl Warrior{
+    fn atacar(&self){
+        println!("Estoy atacando y tengo {} vidas", self.lives);
+    }
+}
+
+fn main() {
+    let conan = Warrior {
+        name: String::from("Conan"),
+        lives: 5,
+        strength: 9,
+    };
+
+println!("{} tiene {} vidas y {} de fuerza", conan.name, conan.lives, conan.strength);
+
+conan.atacar();
+
+}
+// ┌──────────────────────────────────────────────────────────────┐
+// │                 ⚠️  CUADRO DE MALAS PRÁCTICAS  ⚠️             │
+// ├──────────────────────────────────────────────────────────────┤
+// │ 1. `mut` innecesario                                          │
+// │    Declaras `let mut conan`, pero nunca lo modificas.         │
+// │    → Warning: “variable does not need to be mutable”.         │
+// ├──────────────────────────────────────────────────────────────┤
+// │ 2. Estilo de formato                                          │
+// │    Falta espacio tras los `:` y las llaves no están alineadas.│
+// │    → No es error, pero rompe las convenciones de Rust.        │
+// ├──────────────────────────────────────────────────────────────┤
+// │ 3. Nombre incorrecto del campo `lifes`                        │
+// │    En inglés correcto sería `lives`.                          │
+// │    → No afecta al compilador, pero sí a la claridad.          │
+// ├──────────────────────────────────────────────────────────────┤
+// │ 4. Campo `strength` no utilizado                              │
+// │    El struct tiene un campo que no se usa en ningún sitio.    │
+// │    → No da warning, pero es mala práctica.                    │
+// ├──────────────────────────────────────────────────────────────┤
+// │ 5. Falta de métodos (`impl`)                                  │
+// │    Acceder a los campos está bien, pero es más idiomático     │
+// │    crear métodos para operaciones comunes.                    │
+// ├──────────────────────────────────────────────────────────────┤
+// │ 6. Falta de `#[derive(Debug)]`                                │
+// │    Útil para imprimir structs fácilmente durante depuración.  │
+// │    → No es obligatorio, pero sí recomendable.                 │
+// └──────────────────────────────────────────────────────────────┘
+
 
 
 */
