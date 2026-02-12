@@ -630,6 +630,177 @@ conan.atacar();
 // └──────────────────────────────────────────────────────────────┘
 
 
+//11. ENUMERABLES Y COINCIDENCIAS : 
+
+
+enum IpAddrKind {
+    V4,
+    V6,
+}
+//PODEMOS ASIGNARLOS A VARIABLES
+    let four = IpAddrKind::V4;
+    let six = IpAddrKind::V6;
+
+//PODEMOS PASARLO POR PARAMETROS 
+    fn route(ip_kind: IpAddrKind) {} 
+    route(IpAddrKind::V4);
+    route(IpAddrKind::V6);
+
+        enum IpAddrKind {
+        V4,
+        V6,
+    }
+
+
+ //USAR EL ENUM DENTRO DE ESTRUCTURAS 
+    struct IpAddr {
+        kind: IpAddrKind,
+        address: String,
+    }
+
+    let home = IpAddr {
+        kind: IpAddrKind::V4,
+        address: String::from("127.0.0.1"),
+    };
+
+    let loopback = IpAddr {
+        kind: IpAddrKind::V6,
+        address: String::from("::1"),
+    };
+//ASOCIARLE OTROS TIPOS DE DATOS 
+
+
+
+        enum IpAddr {
+        V4(u8, u8, u8, u8),
+        V6(String),
+    }
+
+    let home = IpAddr::V4(127, 0, 0, 1);
+
+    let loopback = IpAddr::V6(String::from("::1"));
+ 
+
+//USAR ESTRUCTURAS DENTRO DE ENUMERABLES 
+
+    struct Ipv4Addr {
+    // --snip--
+}
+
+struct Ipv6Addr {
+    // --snip--
+}
+
+enum IpAddr {
+    V4(Ipv4Addr),
+    V6(Ipv6Addr),
+}
+
+//FUNCIONES EN ENUMERABLES 
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+    impl Message {
+        fn call(&self) {
+            // method body would be defined here
+        }
+    }
+
+    let m = Message::Write(String::from("hello"));
+    m.call();
+
+    //ENUMERABLES 
+
+    enum Option<T> {
+    None,
+    Some(T),
+}
+
+    let some_number = Some(5);
+    let some_char = Some('e');
+
+    let absent_number: Option<i32> = None;
+
+//COINCIDENCIAS 
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter,
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter => 25,
+    }
+}
+//PODEMOS PASAR UN VALOR O PASARLE NADA Y ME SUMARA O NO ME DEVOLVERA NADA 
+    fn plus_one(x: Option<i32>) -> Option<i32> {
+        match x {
+            None => None,
+            Some(i) => Some(i + 1),
+        }
+    }
+
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
+//SEGUN SALGA EL RESULTADO DE UN DADO PUEDEN PASAR COSAS DISTINTAS 
+
+    let dice_roll = 9;
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        other => move_player(other),
+    }
+
+    fn add_fancy_hat() {}
+    fn remove_fancy_hat() {}
+    fn move_player(num_spaces: u8) {}
+
+    // MAS COINCIDENCIAS 
+
+    impl UsState {
+    fn existed_in(&self, year: u16) -> bool {
+        match self {
+            UsState::Alabama => year >= 1819,
+            UsState::Alaska => year >= 1959,
+            // -- snip --
+        }
+    }
+
+
+    //mas comprobaciones 
+    enum Option<T> {
+    Some(T),
+    None,
+} 
+fn describe_state_quarter(coin: Coin) -> Option<String> {
+    if let Coin::Quarter(state) = coin {
+        if state.existed_in(1900) {
+            Some(format!("{state:?} is pretty old, for America!"))
+        } else {
+            Some(format!("{state:?} is relatively new."))
+        }
+    } else {
+        None
+    }
+}
+//format! en Rust es una macro que construye un String usando interpolación de variables, muy parecido a println!, pero en lugar de imprimirlo, lo devuelve como texto.
+
+En tu código aparece así:
+Some(format!("{state:?} is pretty old, for America!"))
+
+
+}
+
 
 */
 
