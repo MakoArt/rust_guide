@@ -802,5 +802,177 @@ Some(format!("{state:?} is pretty old, for America!"))
 }
 
 
+12.PACKAGES 
+-------------
+//creamos una libreria 
+//cargo new restaurant --lib  
+//main.rs y lib.rs son los crate raices 
+
+//    // Absolute path
+//     crate::front_of_house::hosting::add_to_waitlist();
+
+//     // Relative path
+//     front_of_house::hosting::add_to_waitlist();
+
+
+// mod front_of_house {
+//     mod hosting {
+//         fn add_to_waitlist() {}
+
+//         fn seat_at_table() {}
+//     }
+
+//     mod serving {
+//         fn take_order() {}
+
+//         fn serve_order() {}
+
+//         fn take_payment() {}
+//     }
+// }
+
+//  En Rust, todos los elementos 
+//  (funciones, métodos, estructuras, 
+//     enums, módulos y constantes) 
+//     son privados de los módulos 
+//     padres por defecto. 
+//     Si quieres Para hacer que 
+//     un objeto como una función 
+//     o estructura sea privado, 
+//     lo pones en un 
+//     módulo.hostinghostingadd_to_waitlist
+
+
+ mod front_of_house {
+  pub mod hosting {
+       pub fn add_to_waitlist() 
+       {
+           println!("Todo va bien");
+
+       }
+    }
+}
+
+pub fn eat_at_restaurant() {
+    // Absolute path
+    crate::front_of_house::hosting::add_to_waitlist();
+
+    // Relative path
+    front_of_house::hosting::add_to_waitlist();
+}
+
+// Podemos construir caminos 
+// relativos que comienzan 
+// en el módulo padre, 
+// en lugar de el módulo 
+// actual o la raíz de caja, 
+// usando al inicio de la Camino. 
+// Esto es como iniciar una ruta de 
+// sistema de archivos con la sintaxis q
+// ue significa para ir al directorio principal. 
+// Usar nos permite referenciar un objeto que sabemos 
+// que está en el módulo padre, lo que puede hacer
+//  que reorganizar el módulo El árbol es más fácil
+//   cuando el módulo está estrechamente relacionado 
+//   con el padre pero el padre Quizá algún día se 
+//   traslade a otro lugar del árbol de módulos.super..super 
+
+fn deliver_order() {}
+
+mod back_of_house {
+    fn fix_incorrect_order() {
+        cook_order();
+        super::deliver_order();
+    }
+
+    fn cook_order() {}
+}
+
+//Podemos poner use y no tener que llamar a toda la ruta completa 
+
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+use crate::front_of_house::hosting;
+
+mod customer {
+    pub fn eat_at_restaurant() {
+        hosting::add_to_waitlist();
+    }
+}
+
+//Para no repetir rutas   
+
+use std::fmt::Result;
+use std::io::Result as IoResult;
+
+fn function1() -> Result {
+    // --snip--
+}
+
+fn function2() -> IoResult<()> {
+    // --snip--
+}
+
+
+
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+//para usar en el ambito como publico poner pub 
+pub use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+}
+
+//packete(aplicacion) formado por cajas binarias o de libreria 
+//una caja de libreria tiene un modulo , un submodulo y dentro la logica 
+//una cana binaria es donde esta el main.rs y genera el ejecutable 
+//cuando llamamos a una libreria es una caja de libreria externa 
+//para llamar a la libreria standard de rust y un pack es : 
+// use std::collections::HashMap;
+//use std::io;
+//use std::io::Write;
+//use std::collections::*;
+
+
+//TRABAJAR EN VARIOS ARCHIVOS : 
+//LA LIBRERIA RESTAURANT QUEDARIA DE ESTA MANERA: 
+
+en el lib.rs :  
+
+mod front_of_house; //tenemos que incluir el archivo a usar
+
+pub use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+}
+
+en el front_of_house.rs  : 
+
+pub mod hosting {
+    pub fn add_to_waitlist() {}
+}
+
+la estructura de carpetas es : 
+
+my-project : 
+   -restaurant : libreria 
+     -src 
+       : 
+       front_of_house.rs 
+       lib.rs  
+
+   -src : 
+    main.rs 
+
 */
 
