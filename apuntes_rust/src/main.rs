@@ -974,5 +974,274 @@ my-project :
    -src : 
     main.rs 
 
+
+13.COLECCIONES 
+
+// VECTORES  
+//DECLARACIÓN  SIN VECTOR SIN DATOS 
+    let v: Vec<i32> = Vec::new();
+//INICIALIZACION SIN DECLARACION 
+       let v = vec![1, 2, 3]; 
+
+   
+  //ACTUALIZACION DEL VECTOR 
+      let mut v = Vec::new();
+
+    v.push(5);
+    v.push(6);
+    v.push(7);
+    v.push(8);
+
+    //hacer referencia a un elemento del array 
+        let v = vec![1, 2, 3, 4, 5];
+
+    let third: &i32 = &v[2];
+    println!("The third element is {third}");
+
+    let third: Option<&i32> = v.get(2);
+    match third {
+        Some(third) => println!("The third element is {third}"),
+        None => println!("There is no third element."),
+    }
+  // Con la primera declaracion da error si no existe un indice 
+  //con la segunda no da error 
+      let v = vec![1, 2, 3, 4, 5];
+
+    let does_not_exist = &v[100];
+    let does_not_exist = v.get(100);
+
+    //EJEMPLO 
+
+        let mut v = vec![1, 2, 3, 4, 5]; //DECLARO ARRAY INICIALIZAO
+
+    let first = &v[0]; //HAGO REFERENCIA AL PRIMER ELEMENTO
+
+    v.push(6);//PUSH , SE GENERA NUEVO VECTOR HASTA 6 Y DESAPARECE EL ANTERIOR
+
+    println!("The first element is: {first}");//COMO LA REFERENCIA ES AL VECTOR ANTERIOR Y NO EXISTE DA ERROR
+  
+    //RECORRER UN VECTOR  
+        let v = vec![100, 32, 57];
+    for i in &v {
+        println!("{i}");
+    }
+
+    //ITERANDO SOBRE REFERENCIAS MUTABLES 
+    let mut v = vec![100, 32, 57];
+    for i in &mut v {
+        *i += 50;
+    }
+
+  //PÀRA GUARDAR ELEMENTOS DE DISTINTO TIPO ENGAÑANDO AL 
+  //LENGUAJE 
+      enum SpreadsheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String),
+    }
+
+    let row = vec![
+        SpreadsheetCell::Int(3),
+        SpreadsheetCell::Text(String::from("blue")),
+        SpreadsheetCell::Float(10.12),
+    ];
+
+    //CADENAS DE STRINGS 
+      //declaracion inmutable  
+          let new_s:&str=34;
+     //declaracion de un string mutable 
+        let mut s = String::new(); 
+        // o 
+         let s = String::from("initial contents");
+   
+        //otra forma de hacerlo mutable 
+        let data = "initial contents";
+
+       let s = data.to_string();
+
+    // ya podemos trabajar con el metodo asi 
+    let s = "initial contents".to_string();
+
+   // multiples lenguajes 
+       let hello = String::from("السلام عليكم");
+    let hello = String::from("Dobrý den");
+    let hello = String::from("Hello");
+    let hello = String::from("שלום");
+    let hello = String::from("नमस्ते");
+    let hello = String::from("こんにちは");
+    let hello = String::from("안녕하세요");
+    let hello = String::from("你好");
+    let hello = String::from("Olá");
+    let hello = String::from("Здравствуйте");
+    let hello = String::from("Hola");
+
+  //otro ejemplo 
+  //(usamos push para añadir char '' al final , y 
+  // push_str para cadenas mas largas al final )
+   let mut s1 = String::from("foo");
+    let s2 = "bar";
+    s1.push_str(s2);
+    println!("s2 is {s2}"); 
+
+    //OTRO EJEMPLO 
+    let s1 = String::from("Hello, ");
+    let s2 = String::from("world!");
+    let s3 = s1 + &s2; // note s1 has been moved here and can no longer be used
+    
+    //PODEMOS RECORRER CADA ELEMENTO CONVIRTIENDOLO EN CHAR 
+    for c in "Зд".chars() {
+    println!("{c}");
+   } 
+   //O RECORRER NUMERCIAMENTE POR BYTES 
+   for b in "Зд".bytes() {
+    println!("{b}");
+}
+
+//HASH MAP  
+
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+//ACCEDEMOS A UN VALOR DEL HASH MAP 
+
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    let team_name = String::from("Blue");
+    let score = scores.get(&team_name).copied().unwrap_or(0);
+
+ // -------------------------------------------------------------
+// EXPLICACIÓN DE:
+// let score = scores.get(&team_name).copied().unwrap_or(0);
+// -------------------------------------------------------------
+
+// scores.get(&team_name)
+// Busca la clave `team_name` dentro del HashMap `scores`.
+// Devuelve un Option<&i32>:
+//   - Some(&valor) si la clave existe
+//   - None si no existe
+
+// .copied()
+// Convierte Option<&i32> en Option<i32> copiando el valor.
+// Es decir, pasa de referencia (&i32) a valor (i32).
+
+// .unwrap_or(0)
+// Toma el Option<i32> y:
+//   - Si es Some(valor), devuelve ese valor
+//   - Si es None, devuelve 0 como valor por defecto
+
+// Resultado final:
+// Obtiene el puntaje del equipo si existe; si no, usa 0.
+//nOS DEVUELVE LOS DATOS EN ORDEN ALEATORIO 
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+
+    for (key, value) in &scores {
+        println!("{key}: {value}");
+    }
+
+   //PODEMOS ACTUALIZAR LOS DATOS SOBREESCRIBIENDOLOS 
+
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Blue"), 25);
+
+    println!("{scores:?}");
+
+// -------------------------------------------------------------
+// EXPLICACIÓN DE:
+// scores.entry(String::from("Yellow")).or_insert(50);
+// -------------------------------------------------------------
+
+// scores.entry(String::from("Yellow"))
+// Accede a la "entrada" del HashMap para la clave "Yellow".
+// Devuelve un Entry, que puede ser:
+//   - OccupiedEntry  → la clave ya existe
+//   - VacantEntry    → la clave no existe
+
+// .or_insert(50)
+// Si la clave NO existe, inserta el valor 50 y devuelve
+// una referencia mutable a ese valor recién insertado.
+// Si la clave YA existe, no cambia nada y devuelve una
+// referencia al valor existente.
+
+// Resultado final:
+// Garantiza que la clave "Yellow" tenga un valor en el HashMap.
+// Si no existía, se crea con 50. Si ya existía, se mantiene.
+
+
+
+ //OTRO EJEMPLO  
+
+    use std::collections::HashMap;
+
+    let text = "hello world wonderful world";
+
+    let mut map = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+
+    println!("{map:?}"); 
+
+    // -------------------------------------------------------------
+// EXPLICACIÓN DEL CÓDIGO COMPLETO
+// -------------------------------------------------------------
+
+use std::collections::HashMap;
+// Importa HashMap desde la librería estándar para poder usarlo.
+
+let text = "hello world wonderful world";
+// Cadena de texto que vamos a analizar palabra por palabra.
+
+let mut map = HashMap::new();
+// Crea un HashMap vacío donde la clave será una palabra (&str)
+// y el valor será un contador (i32). Es mutable porque lo modificaremos.
+
+for word in text.split_whitespace() {
+// split_whitespace() divide el texto en palabras usando espacios.
+// El bucle recorre cada palabra encontrada.
+    
+    let count = map.entry(word).or_insert(0);
+    // map.entry(word):
+    //   Accede a la entrada del HashMap para esa palabra.
+    //   Si existe → devuelve su entrada.
+    //   Si no existe → crea una entrada vacía.
+    //
+    // .or_insert(0):
+    //   Si la palabra NO estaba en el mapa, inserta 0.
+    //   Si ya estaba, no cambia nada.
+    // Devuelve una referencia mutable al valor asociado a la palabra.
+
+    *count += 1;
+    // count es &mut i32, una referencia mutable.
+    // *count desreferencia para obtener el valor.
+    // Incrementa el contador de esa palabra.
+}
+
+println!("{map:?}");
+// Imprime el HashMap usando formato de depuración.
+// Resultado esperado:
+// {"hello": 1, "world": 2, "wonderful": 1}
+
+
+
 */
 
